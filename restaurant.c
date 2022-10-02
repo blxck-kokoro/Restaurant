@@ -11,5 +11,7 @@ int main(void)
         printf("Press enter to display our menu.\n");
         scanf("%c", &menuSwitch);
     }
-        printMenu(menuCategories, menuCategoriesLength);
+    printMenu(menuCategories, menuCategoriesLength);
+
+    
 }
