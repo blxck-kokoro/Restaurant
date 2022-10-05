@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <malloc.h>
+#include <string.h>
 #include "menu.c"
 
 int main(void)
@@ -13,5 +16,9 @@ int main(void)
     }
     printMenu(menuCategories, menuCategoriesLength);
 
-    
+    int appetizersNamesSize = getFileLines("Dishes/appetizers.txt");
+    int appetizersNamesElementSize = 256;
+
+    char appetizersNames[appetizersNamesSize][appetizersNamesElementSize];
+    getDishesNames(appetizersNamesSize, appetizersNamesElementSize, appetizersNames, "Dishes/appetizers.txt");
 }
