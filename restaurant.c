@@ -9,7 +9,7 @@
 int main(void)
 {
     printf("Welcome to the restaurant!\n");
-    printf("Press enter to display our menu. (q to quit)\n");
+    printf("Pass 'a' to display our menu. (q to quit)\n");
     char *menuCategories[MENU_CATEGORIES_LENGTH] = {"1. Appetizers", "2. Soups", "3. Main Courses", "4. Desserts", "5. Beverages"};
 
     //  ***     DISHES' OBJECTS SECTION      ***
@@ -18,7 +18,7 @@ int main(void)
     int appetizersSize = getFileLines(appetizersFilePath) / 2;
     dish *appetizers = malloc(appetizersSize * sizeof(dish));
     makeDishesArray(appetizers, appetizersSize, appetizersFilePath);
-    freeDishes(appetizers, appetizersSize);
+    // freeDishes(appetizers, appetizersSize);
 
     // Soups objects
     char *soupsFilePath = "Dishes/soups.txt";
@@ -58,10 +58,17 @@ int main(void)
         {
             menuSwitch = 0;
         }
-        else if ((int)selection == 10)
+        else if ((int)selection == 'a')
         {
             printf("                            ***            CATEGORIES          ***\n");
             printMenu(menuCategories, MENU_CATEGORIES_LENGTH);
+            printf("\nPass the number of the specific cateogry to view it's content.\n");
+        }
+        else if ((int)selection == '1')
+        {
+            printDishes(appetizers, appetizersSize);
+            printf("'a' MENU    'q' QUIT\n");
+            freeDishes(appetizers, appetizersSize);
         }
     }
 }

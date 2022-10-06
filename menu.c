@@ -11,6 +11,9 @@ typedef struct
 // Prints out menu categories to the terminal
 void printMenu(char *menu[], int menuSize);
 
+// Prints the dishes to user
+void printDishes(dish *dishes, int dishesSize);
+
 // Makes a new dish
 dish makeDish(char *dishName, float dishprice);
 
@@ -35,6 +38,14 @@ void printMenu(char *menu[], int menuSize)
         printf("%s          ", menu[i]);
     }
     printf("\n");
+}
+
+void printDishes(dish *dishes, int dishesSize)
+{
+    for (int i = 0; i < dishesSize; i++)
+    {
+        printf("%s  %.2f$\n\n", dishes[i].name, dishes[i].price);
+    }
 }
 
 dish makeDish(char *dishName, float dishPrice)
