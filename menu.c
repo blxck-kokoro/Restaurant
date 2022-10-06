@@ -91,3 +91,11 @@ void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][el
     }
     fclose(documentPt);
 }
+
+void makeDishesArray(dish dishesArray[], int dishesArraySize, char namesArray[10][256], float pricesArray[])
+{
+    for (int i = 0; i < dishesArraySize; i++)
+    {
+        dishesArray[i] = makeDish(namesArray[i], pricesArray[i]);
+    }
+}

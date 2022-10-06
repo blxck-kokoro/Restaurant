@@ -28,4 +28,13 @@ int main(void)
     float appetizersPrices[appetizerPricesSize];
 
     getDishesInfo(appetizersNamesSize, appetizersNamesElementSize, appetizersNames, appetizersPrices, "Dishes/appetizers.txt");
+
+    dish appetizers[getFileLines("Dishes/appetizers.txt") / 2];
+    makeDishesArray(appetizers, getFileLines("Dishes/appetizers.txt") / 2, appetizersNames, appetizersPrices);
+
+    for (int i = 0; i < 10; i++)
+    {
+        printf("Appetizers[%i].name: %s\n", i, appetizers[i].name);
+        printf("Appetizers[%i].price: %.2f\n\n", i, appetizers[i].price);
+    }
 }
