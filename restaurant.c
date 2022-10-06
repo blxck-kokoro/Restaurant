@@ -16,7 +16,7 @@ int main(void)
     }
     printMenu(menuCategories, menuCategoriesLength);
 
-    int appetizersNamesSize = getFileLines("Dishes/appetizers.txt");
+    int appetizersNamesSize = getFileLines("Dishes/appetizers.txt") / 2;
     int appetizersNamesElementSize = 256;
 
     char appetizersNames[appetizersNamesSize][appetizersNamesElementSize];

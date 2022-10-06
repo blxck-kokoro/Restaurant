@@ -76,12 +76,17 @@ void getDishesNames(int arraySize, int elementSize, char namesArray[arraySize][e
     FILE *documentPt = fopen(documentPath, "r");
 
     char line[elementSize];
+    int lines = 0;
     int namesCounter = 0;
 
     while (fgets(line, elementSize, documentPt))
     {
-        strcpy(namesArray[namesCounter], line);
-        namesCounter++;
+        lines++;
+        if (lines % 2 == 1)
+        {
+            strcpy(namesArray[namesCounter], line);
+            namesCounter++;
+        }
     }
     fclose(documentPt);
 }
