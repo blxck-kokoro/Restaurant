@@ -18,7 +18,10 @@ int main(void)
 
     int appetizersNamesSize = getFileLines("Dishes/appetizers.txt") / 2;
     int appetizersNamesElementSize = 256;
-
     char appetizersNames[appetizersNamesSize][appetizersNamesElementSize];
-    getDishesNames(appetizersNamesSize, appetizersNamesElementSize, appetizersNames, "Dishes/appetizers.txt");
+
+    int appetizerPricesSize = getFileLines("Dishes/appetizers.txt") / 2;
+    float appetizersPrices[appetizerPricesSize];
+
+    getDishesInfo(appetizersNamesSize, appetizersNamesElementSize, appetizersNames, appetizersPrices, "Dishes/appetizers.txt");
 }

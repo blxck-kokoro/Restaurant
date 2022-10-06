@@ -18,7 +18,7 @@ dish makeDish(char *dishName, float dishprice);
 int getFileLines(char *documentPath);
 
 // Polutes namesArray with name of dishes from specific category.
-void getDishesNames(int arraySize, int elementSize, char namesArray[arraySize][elementSize], char *documentPath);
+void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][elementSize], float pricesArray[arraySize], char *documentPath);
 
 
 
@@ -71,13 +71,14 @@ int getFileLines(char *documentPath)
     return numOfLines;
 }
 
-void getDishesNames(int arraySize, int elementSize, char namesArray[arraySize][elementSize], char *documentPath)
+void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][elementSize], float pricesArray[arraySize], char *documentPath)
 {
     FILE *documentPt = fopen(documentPath, "r");
 
     char line[elementSize];
     int lines = 0;
     int namesCounter = 0;
+    int pricesCounter = 0;
 
     while (fgets(line, elementSize, documentPt))
     {
@@ -86,6 +87,11 @@ void getDishesNames(int arraySize, int elementSize, char namesArray[arraySize][e
         {
             strcpy(namesArray[namesCounter], line);
             namesCounter++;
+        }
+        else
+        {
+            pricesArray[pricesCounter] = atof(line);
+            pricesCounter++;
         }
     }
     fclose(documentPt);
