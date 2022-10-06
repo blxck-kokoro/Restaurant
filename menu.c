@@ -17,8 +17,14 @@ dish makeDish(char *dishName, float dishprice);
 // Gets the total number of lines of the file.
 int getFileLines(char *documentPath);
 
-// Polutes namesArray with name of dishes from specific category.
+// Polutes namesArray and pricesArray with name of dishes from specific category.
 void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][elementSize], float pricesArray[arraySize], char *documentPath);
+
+// Polutes dishesArray with dish objects
+void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath);
+
+// Frees dynamic allocated memory used in makeDishArray()
+void freeDishes(dish *dishesArray, int dishesArraySize);
 
 
 
@@ -52,7 +58,7 @@ int getFileLines(char *documentPath)
     }
 
     int numOfLines = 1;
-    char c;
+    char c = 'a';
 
     while (c != EOF)
     {
@@ -92,10 +98,30 @@ void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][el
     fclose(documentPt);
 }
 
-void makeDishesArray(dish dishesArray[], int dishesArraySize, char namesArray[10][256], float pricesArray[])
+void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath)
+{
+    int dishesNamesSize = dishesArraySize;
+    int dishesNamesElementSize = 256;
+    char dishesNames[dishesNamesSize][dishesNamesElementSize];
+
+    int dishesPricesSize = dishesArraySize;
+    float dishesPrices[dishesPricesSize];
+
+    getDishesInfo(dishesNamesSize, dishesNamesElementSize, dishesNames, dishesPrices, documentPath);
+
+    for (int i = 0; i < dishesArraySize; i++)
+    {
+        dishesArray[i].name = malloc(256 * sizeof(char));
+        strcpy(dishesArray[i].name, dishesNames[i]);
+        dishesArray[i].price = dishesPrices[i];
+    }
+}
+
+void freeDishes(dish *dishesArray, int dishesArraySize)
 {
     for (int i = 0; i < dishesArraySize; i++)
     {
-        dishesArray[i] = makeDish(namesArray[i], pricesArray[i]);
+        free(dishesArray[i].name);
     }
+    free(dishesArray);
 }
