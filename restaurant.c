@@ -9,15 +9,8 @@
 int main(void)
 {
     printf("Welcome to the restaurant!\n");
-
+    printf("Press enter to display our menu. (q to quit)\n");
     char *menuCategories[MENU_CATEGORIES_LENGTH] = {"1. Appetizers", "2. Soups", "3. Main Courses", "4. Desserts", "5. Beverages"};
-
-    char menuSwitch = 'a';
-    while((int)menuSwitch != 10)
-    {
-        printf("Press enter to display our menu.\n");
-        scanf("%c", &menuSwitch);
-    }
 
     //  ***     DISHES' OBJECTS SECTION      ***
     //  Appetizers objects
@@ -54,4 +47,21 @@ int main(void)
     dish *beverages = malloc(beveragesSize * sizeof(dish));
     makeDishesArray(beverages, beveragesSize, beveragesFilePath);
     freeDishes(beverages, beveragesSize);
+
+    char menuSwitch = 1;
+    while(menuSwitch == 1)
+    {
+        char selection;
+        scanf("%c", &selection);
+
+        if ((int)selection == 'q')
+        {
+            menuSwitch = 0;
+        }
+        else if ((int)selection == 10)
+        {
+            printf("                            ***            CATEGORIES          ***\n");
+            printMenu(menuCategories, MENU_CATEGORIES_LENGTH);
+        }
+    }
 }
