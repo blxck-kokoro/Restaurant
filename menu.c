@@ -16,6 +16,9 @@ void printMenu(char *menu[], int menuSize);
 // Prints the dishes to user
 void printDishes(dish *dishes, int dishesSize);
 
+// Prints selection buttons, which tell user how to navigate across the progam
+void printSelectionButtons(void);
+
 // Makes a new dish
 dish makeDish(char *dishName, float dishprice);
 
@@ -51,6 +54,11 @@ void printDishes(dish *dishes, int dishesSize)
     {
         printf("%s  %.2f$\n\n", dishes[i].name, dishes[i].price);
     }
+}
+
+void printSelectionButtons(void)
+{
+    printf("'a' MENU    'q' QUIT\n");
 }
 
 dish makeDish(char *dishName, float dishPrice)

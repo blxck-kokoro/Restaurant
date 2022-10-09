@@ -41,7 +41,7 @@ int main(void)
             printDishes(appetizers, appetizersSize);
             
             order = makeOrder(order, appetizers, appetizersSize, &dishCounter);
-            printf("'a' MENU    'q' QUIT\n");
+            printSelectionButtons();
             freeDishes(appetizers, appetizersSize);
         }
         else if (selection == '2')
@@ -53,7 +53,7 @@ int main(void)
             printDishes(soups, soupsSize);
 
             order = makeOrder(order, soups, soupsSize, &dishCounter);
-            printf("'a' MENU    'q' QUIT\n");
+            printSelectionButtons();
             freeDishes(soups, soupsSize);
         }
         else if (selection == '3')
@@ -65,7 +65,7 @@ int main(void)
             printDishes(mainCourses, mainCoursesSize);
 
             order = makeOrder(order, mainCourses, mainCoursesSize, &dishCounter);
-            printf("'a' MENU    'q' QUIT\n");
+            printSelectionButtons();
             freeDishes(mainCourses, mainCoursesSize);
         }
         else if (selection == '4')
@@ -77,7 +77,7 @@ int main(void)
             printDishes(desserts, dessertsSize);
 
             order = makeOrder(order, desserts, dessertsSize, &dishCounter);
-            printf("'a' MENU    'q' QUIT\n");
+            printSelectionButtons();
             freeDishes(desserts, dessertsSize);
         }
         else if (selection == '5')
@@ -89,7 +89,7 @@ int main(void)
             printDishes(beverages, beveragesSize);
 
             order = makeOrder(order, beverages, beveragesSize, &dishCounter);
-            printf("'a' MENU    'q' QUIT\n");
+            printSelectionButtons();
             freeDishes(beverages, beveragesSize);
         }
     }
