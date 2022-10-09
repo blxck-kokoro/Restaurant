@@ -37,7 +37,7 @@ int main(void)
             char *appetizersFilePath = "Dishes/appetizers.txt";
             int appetizersSize = getFileLines(appetizersFilePath) / 2;
             dish *appetizers = malloc(appetizersSize * sizeof(dish));
-            makeDishesArray(appetizers, appetizersSize, appetizersFilePath);
+            makeDishesArray(appetizers, appetizersSize, appetizersFilePath, "appetizers");
             printDishes(appetizers, appetizersSize);
             
             order = makeOrder(order, appetizers, appetizersSize, &dishCounter);
@@ -49,7 +49,7 @@ int main(void)
             char *soupsFilePath = "Dishes/soups.txt";
             int soupsSize = getFileLines(soupsFilePath) / 2;
             dish *soups = malloc(soupsSize * sizeof(dish));
-            makeDishesArray(soups, soupsSize, soupsFilePath);
+            makeDishesArray(soups, soupsSize, soupsFilePath, "soups");
             printDishes(soups, soupsSize);
 
             order = makeOrder(order, soups, soupsSize, &dishCounter);
@@ -61,7 +61,7 @@ int main(void)
             char *mainCoursesFilePath = "Dishes/mainCourses.txt";
             int mainCoursesSize = getFileLines(mainCoursesFilePath) / 2;
             dish *mainCourses = malloc(mainCoursesSize * sizeof(dish));
-            makeDishesArray(mainCourses, mainCoursesSize, mainCoursesFilePath);
+            makeDishesArray(mainCourses, mainCoursesSize, mainCoursesFilePath, "mainCourses");
             printDishes(mainCourses, mainCoursesSize);
 
             order = makeOrder(order, mainCourses, mainCoursesSize, &dishCounter);
@@ -73,7 +73,7 @@ int main(void)
             char *dessertsFilePath = "Dishes/desserts.txt";
             int dessertsSize = getFileLines(dessertsFilePath) / 2;
             dish *desserts = malloc(dessertsSize * sizeof(dish));
-            makeDishesArray(desserts, dessertsSize, dessertsFilePath);
+            makeDishesArray(desserts, dessertsSize, dessertsFilePath, "desserts");
             printDishes(desserts, dessertsSize);
 
             order = makeOrder(order, desserts, dessertsSize, &dishCounter);
@@ -85,7 +85,7 @@ int main(void)
             char *beveragesFilePath = "Dishes/beverages.txt";
             int beveragesSize = getFileLines(beveragesFilePath) / 2;
             dish *beverages = malloc(beveragesSize * sizeof(dish));
-            makeDishesArray(beverages, beveragesSize, beveragesFilePath);
+            makeDishesArray(beverages, beveragesSize, beveragesFilePath, "beverages");
             printDishes(beverages, beveragesSize);
 
             order = makeOrder(order, beverages, beveragesSize, &dishCounter);

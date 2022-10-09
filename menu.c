@@ -5,6 +5,7 @@
 typedef struct
 {
     char *name;
+    char *category;
     float price;
 } dish;
 
@@ -25,7 +26,7 @@ int getFileLines(char *documentPath);
 void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][elementSize], float pricesArray[arraySize], char *documentPath);
 
 // Polutes dishesArray with dish objects
-void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath);
+void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath, char *dishesCategory);
 
 // Frees dynamic allocated memory used in makeDishesArray()
 void freeDishes(dish *dishesArray, int dishesArraySize);
@@ -113,7 +114,7 @@ void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][el
     fclose(documentPt);
 }
 
-void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath)
+void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath, char *dishesCategory)
 {
     int dishesNamesSize = dishesArraySize;
     int dishesNamesElementSize = 256;
@@ -128,6 +129,8 @@ void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath)
     {
         dishesArray[i].name = malloc(256 * sizeof(char));
         strcpy(dishesArray[i].name, dishesNames[i]);
+        dishesArray[i].category = malloc(256 * sizeof(char));
+        strcpy(dishesArray[i].category, dishesCategory);
         dishesArray[i].price = dishesPrices[i];
     }
 }
@@ -137,6 +140,7 @@ void freeDishes(dish *dishesArray, int dishesArraySize)
     for (int i = 0; i < dishesArraySize; i++)
     {
         free(dishesArray[i].name);
+        free(dishesArray[i].category);
     }
     free(dishesArray);
 }
@@ -166,6 +170,8 @@ dish *makeOrder(dish *orderArray, dish *dishesArray, int dishesArraySize, int *c
                 orderArray = realloc(orderArray, *counter * sizeof(dish));
                 orderArray[*counter - 1].name = malloc(256 * sizeof(char));
                 strcpy(orderArray[*counter - 1].name, dishesArray[i].name);
+                orderArray[*counter - 1].category = malloc(256 * sizeof(char));
+                strcpy(orderArray[*counter - 1].category, dishesArray[i].category);
                 orderArray[*counter - 1].price = dishesArray[i].price;
                 break;
             }
