@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
+#include <stdbool.h>
 #include "menu.c"
-
 #define MENU_CATEGORIES_LENGTH 5
 
 int main(void)
@@ -12,6 +12,8 @@ int main(void)
     printf("Pass 'a' to display our menu. (q to quit)\n");
     char *menuCategories[MENU_CATEGORIES_LENGTH] = {"1. Appetizers", "2. Soups", "3. Main Courses", "4. Desserts", "5. Beverages"};
 
+    dish *order = malloc(sizeof(dish));
+    int dishCounter = 0;
     //  ***   MENU SECTION  ***
     int menuSwitch = 1;
     while(menuSwitch == 1)
@@ -37,7 +39,8 @@ int main(void)
             dish *appetizers = malloc(appetizersSize * sizeof(dish));
             makeDishesArray(appetizers, appetizersSize, appetizersFilePath);
             printDishes(appetizers, appetizersSize);
-
+            
+            order = makeOrder(order, appetizers, appetizersSize, &dishCounter);
             printf("'a' MENU    'q' QUIT\n");
             freeDishes(appetizers, appetizersSize);
         }
@@ -86,4 +89,5 @@ int main(void)
             freeDishes(beverages, beveragesSize);
         }
     }
+    freeDishes(order, dishCounter);
 }

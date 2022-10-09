@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct
 {
@@ -26,8 +27,11 @@ void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][el
 // Polutes dishesArray with dish objects
 void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath);
 
-// Frees dynamic allocated memory used in makeDishArray()
+// Frees dynamic allocated memory used in makeDishesArray()
 void freeDishes(dish *dishesArray, int dishesArraySize);
+
+// Returns updated, dynamically allocated dish array of order
+dish *makeOrder(dish *orderArray, dish *dishesArray, int dishesArraySize, int *counter);
 
 
 
@@ -135,4 +139,37 @@ void freeDishes(dish *dishesArray, int dishesArraySize)
         free(dishesArray[i].name);
     }
     free(dishesArray);
+}
+
+dish *makeOrder(dish *orderArray, dish *dishesArray, int dishesArraySize, int *counter)
+{
+    while (true)
+    {
+        printf("Pass the number of the dish to add it to the order.\n");
+        printf("'q' QUIT\n");
+        char addToOrder[256];
+        scanf("%s", addToOrder);
+
+        if (*addToOrder == 'q')
+        {
+            break;
+        }
+
+        for (int i = 0; i < dishesArraySize; i++)
+        {
+            if (atoi(addToOrder) - 1 == i)
+            {
+                printf("%s", dishesArray[i].name);
+                printf("Added to the order.\n");
+
+                *counter = *counter + 1;
+                orderArray = realloc(orderArray, *counter * sizeof(dish));
+                orderArray[*counter - 1].name = malloc(256 * sizeof(char));
+                strcpy(orderArray[*counter - 1].name, dishesArray[i].name);
+                orderArray[*counter - 1].price = dishesArray[i].price;
+                break;
+            }
+        }
+    }
+    return orderArray;
 }
