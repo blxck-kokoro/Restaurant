@@ -52,6 +52,7 @@ int main(void)
             makeDishesArray(soups, soupsSize, soupsFilePath);
             printDishes(soups, soupsSize);
 
+            order = makeOrder(order, soups, soupsSize, &dishCounter);
             printf("'a' MENU    'q' QUIT\n");
             freeDishes(soups, soupsSize);
         }
@@ -63,6 +64,7 @@ int main(void)
             makeDishesArray(mainCourses, mainCoursesSize, mainCoursesFilePath);
             printDishes(mainCourses, mainCoursesSize);
 
+            order = makeOrder(order, mainCourses, mainCoursesSize, &dishCounter);
             printf("'a' MENU    'q' QUIT\n");
             freeDishes(mainCourses, mainCoursesSize);
         }
@@ -74,6 +76,7 @@ int main(void)
             makeDishesArray(desserts, dessertsSize, dessertsFilePath);
             printDishes(desserts, dessertsSize);
 
+            order = makeOrder(order, desserts, dessertsSize, &dishCounter);
             printf("'a' MENU    'q' QUIT\n");
             freeDishes(desserts, dessertsSize);
         }
@@ -85,6 +88,7 @@ int main(void)
             makeDishesArray(beverages, beveragesSize, beveragesFilePath);
             printDishes(beverages, beveragesSize);
 
+            order = makeOrder(order, beverages, beveragesSize, &dishCounter);
             printf("'a' MENU    'q' QUIT\n");
             freeDishes(beverages, beveragesSize);
         }
