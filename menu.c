@@ -10,6 +10,10 @@ typedef struct
 } dish;
 
 
+// Possible dish categories
+#define DISH_CATEGORIES_LENGTH 5
+char *dishCategories[DISH_CATEGORIES_LENGTH] = {"Appetizers", "Soups", "Main Courses", "Desserts", "Beverages"};
+
 // Prints out menu categories to the terminal
 void printMenu(char *menu[], int menuSize);
 
@@ -18,6 +22,12 @@ void printDishes(dish *dishes, int dishesSize);
 
 // Prints selection buttons, which tell user how to navigate across the progam
 void printSelectionButtons(void);
+
+// Prints all the dishes from orderArray, which belong to the specific category.
+void printOrderCategory(dish *orderArray, int counter, char *category);
+
+// Pints the orderArray
+void printOrder(dish *orderArray, int counter);
 
 // Makes a new dish
 dish makeDish(char *dishName, float dishprice);
@@ -43,7 +53,7 @@ void printMenu(char *menu[], int menuSize)
 {
     for (int i = 0; i < menuSize; i++)
     {
-        printf("%s          ", menu[i]);
+        printf("%i. %s          ", i + 1, menu[i]);
     }
     printf("\n");
 }
@@ -58,7 +68,7 @@ void printDishes(dish *dishes, int dishesSize)
 
 void printSelectionButtons(void)
 {
-    printf("'a' MENU    'q' QUIT\n");
+    printf("'a' MENU    'q' QUIT    's' SHOW ORDER\n");
 }
 
 dish makeDish(char *dishName, float dishPrice)
@@ -186,4 +196,33 @@ dish *makeOrder(dish *orderArray, dish *dishesArray, int dishesArraySize, int *c
         }
     }
     return orderArray;
+}
+
+void printOrderCategory(dish *orderArray, int counter, char *category)
+{
+    printf("%s: \n", category);
+    int isEmpty = 1;
+    for (int i = 0; i < counter; i++)
+    {
+        if (strcmp(orderArray[i].category, category) == 0)
+        {
+            isEmpty = 0;
+            if (isEmpty == 0)
+            {
+                printf("%s, %.2f$\n", orderArray[i].name, orderArray[i].price);
+            }
+        }
+    }
+    if (isEmpty == 1)
+    {
+        printf("There are no %s in the order.\n", category);
+    }
+}
+
+void printOrder(dish *orderArray, int counter)
+{
+    for (int i = 0; i < DISH_CATEGORIES_LENGTH; i++)
+    {
+        printOrderCategory(orderArray, counter, dishCategories[i]);
+    }
 }
