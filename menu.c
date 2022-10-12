@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct
 {
@@ -68,7 +69,7 @@ void printDishes(dish *dishes, int dishesSize)
 
 void printSelectionButtons(void)
 {
-    printf("'a' MENU    'q' QUIT    's' SHOW ORDER\n");
+    printf("'a' MENU    'q' QUIT    's' SHOW ORDER  'r' REMOVE DISH\n");
 }
 
 dish makeDish(char *dishName, float dishPrice)
@@ -225,4 +226,56 @@ void printOrder(dish *orderArray, int counter)
     {
         printOrderCategory(orderArray, counter, dishCategories[i]);
     }
+}
+
+void  removeCategory(dish *orderArray, int orderArraySize, dish *dishesArray, int dishArraySize)
+{
+    while (true)
+    {
+        printf("Pass the number of the dish you would like to remove.\n");
+        printf("'q' QUIT");
+        char removeDishPosition[256];
+        scanf("%s", removeDishPosition);
+
+        if (removeDishPosition == 'q')
+        {
+            break;
+        }
+
+        for (int i = 0; i < orderArraySize; i++)
+        {
+            if (orderArray[i].name == dishesArray[atoi(removeDishPosition) - 1].name)
+            {
+                printf("Dish found.\n");
+                printf("%s", dishesArray[atoi(removeDishPosition) - 1].name);
+            }
+        }
+    }
+}
+
+dish *removeDish(dish *orderArray, int orderArraySize)
+{
+    while (true)
+    {
+        printf("Select the category of the dish you want to remove from the order.\n");
+        printf("'1' APPETIZERS  '2' SOUPS   '3' MAIN COURSES    '4' DESSERTS    '5' BEVERAGES   'q' QUIT\n");
+        char removeFromOrder[256];
+        scanf("%s", removeFromOrder);
+
+        if (*removeFromOrder == 'q')
+        {
+            break;
+        }
+        else if (*removeFromOrder == '1')
+        {
+            removeCategory(orderArray, orderArraySize)
+        }
+
+        // Removes element at the specific location from the array
+        // for (int i = removePosition - 1; i < orderArraySize - 1; i++)
+        // {
+        //     orderArray[i] = orderArray[i + 1];
+        // }
+    }
+    return orderArray;
 }

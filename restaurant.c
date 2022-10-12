@@ -37,6 +37,11 @@ int main(void)
             printOrder(order, dishCounter);
             printSelectionButtons();
         }
+        else if (selection == 'r')
+        {
+            removeDish(order, dishCounter);
+            printSelectionButtons();
+        }
         else if (selection == '1')
         {
             char *appetizersFilePath = "Dishes/appetizers.txt";
