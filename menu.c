@@ -48,6 +48,12 @@ void freeDishes(dish *dishesArray, int dishesArraySize);
 // Returns updated, dynamically allocated dish array of order
 dish *makeOrder(dish *orderArray, dish *dishesArray, int dishesArraySize, int *counter);
 
+// Returns the char representing category of the dish we want to remove from the order
+char selectCategoryToRemove(void);
+
+// Removes the dish from the orderArray
+dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int dishesArraySize, int category);
+
 
 
 void printMenu(char *menu[], int menuSize)
@@ -228,54 +234,77 @@ void printOrder(dish *orderArray, int counter)
     }
 }
 
-void  removeCategory(dish *orderArray, int orderArraySize, dish *dishesArray, int dishArraySize)
+char selectCategoryToRemove(void)
 {
+    printf("Select the category of the dish you would like to remove.\n");
+    printf("'1' APPETIZERS  '2' SOUPS   '3' MAIN COURSES    '4' DESSERTS    '5' BEVERAGES   'q' QUIT\n");
+
     while (true)
     {
-        printf("Pass the number of the dish you would like to remove.\n");
-        printf("'q' QUIT");
-        char removeDishPosition[256];
-        scanf("%s", removeDishPosition);
+        char selection;
+        scanf("%c", &selection);
 
-        if (removeDishPosition == 'q')
+        if (selection == 'q' || selection == '1' || selection == '2' || selection == '3' || selection == '4' || selection == '5')
         {
+            return selection;
             break;
-        }
-
-        for (int i = 0; i < orderArraySize; i++)
-        {
-            if (orderArray[i].name == dishesArray[atoi(removeDishPosition) - 1].name)
-            {
-                printf("Dish found.\n");
-                printf("%s", dishesArray[atoi(removeDishPosition) - 1].name);
-            }
         }
     }
 }
 
-dish *removeDish(dish *orderArray, int orderArraySize)
+dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int dishesArraySize, int category)
 {
+    printf("%s:\n", dishCategories[category - 1]);
+    for (int i = 0; i < *orderArraySize; i++)
+    {
+        if (strcmp(orderArray[i].category, dishCategories[category -1]) == 0)
+        {
+            printf("%s", orderArray[i].name);
+            printf("%.2f$\n", orderArray[i].price);
+        }
+    }
+    printf("\nPass the number of the dish you would like to remove.\n");
+    printf("'q' QUIT\n");
+
     while (true)
     {
-        printf("Select the category of the dish you want to remove from the order.\n");
-        printf("'1' APPETIZERS  '2' SOUPS   '3' MAIN COURSES    '4' DESSERTS    '5' BEVERAGES   'q' QUIT\n");
-        char removeFromOrder[256];
-        scanf("%s", removeFromOrder);
+        char selection[2];
+        scanf("%s", selection);
 
-        if (*removeFromOrder == 'q')
+        if (*selection == 'q')
         {
             break;
         }
-        else if (*removeFromOrder == '1')
+        else if (atoi(selection) - 1 >= 0 && atoi(selection) - 1 < dishesArraySize)
         {
-            removeCategory(orderArray, orderArraySize)
-        }
+            bool dishFound = false;
 
-        // Removes element at the specific location from the array
-        // for (int i = removePosition - 1; i < orderArraySize - 1; i++)
-        // {
-        //     orderArray[i] = orderArray[i + 1];
-        // }
+            for (int i = 0; i < *orderArraySize; i++)
+            {
+                if (strcmp(orderArray[i].name, dishesArray[atoi(selection) - 1].name) == 0)
+                {
+                    printf("Dish found.\n");
+                    printf("%s", dishesArray[atoi(selection) - 1].name);
+                    dishFound = true;
+
+                    for (int j = i; j < *orderArraySize - 1; j++)
+                    {
+                        orderArray[j] = orderArray[j + 1];
+                    }
+                    *orderArraySize = *orderArraySize - 1;
+                    printf("Dish removed succesfuly.\n");
+                    break;
+                }
+            }
+            if (dishFound == false)
+            {
+                printf("Dish not found.\n");
+            }
+        }
+        else
+        {
+            printf("Dish not found.\n");
+        }
     }
     return orderArray;
 }

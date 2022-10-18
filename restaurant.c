@@ -39,7 +39,62 @@ int main(void)
         }
         else if (selection == 'r')
         {
-            removeDish(order, dishCounter);
+            char category = selectCategoryToRemove();
+
+            if (category == '1')
+            {
+                char *appetizersFilePath = "Dishes/appetizers.txt";
+                int appetizersSize = getFileLines(appetizersFilePath) / 2;
+                dish *appetizers = malloc(appetizersSize * sizeof(dish));
+                makeDishesArray(appetizers, appetizersSize, appetizersFilePath, "Appetizers");
+
+                order = removeDish(order, &dishCounter, appetizers, appetizersSize, category - '0');
+                freeDishes(appetizers, appetizersSize);
+            }
+            else if (category == '2')
+            {
+                char *soupsFilePath = "Dishes/soups.txt";
+                int soupsSize = getFileLines(soupsFilePath) / 2;
+                dish *soups = malloc(soupsSize * sizeof(dish));
+                makeDishesArray(soups, soupsSize, soupsFilePath, "Soups");
+
+                order = removeDish(order, &dishCounter, soups, soupsSize, category - '0');
+                freeDishes(soups, soupsSize);
+            }
+            else if (category == '3')
+            {
+                char *mainCoursesFilePath = "Dishes/mainCourses.txt";
+                int mainCoursesSize = getFileLines(mainCoursesFilePath) / 2;
+                dish *mainCourses = malloc(mainCoursesSize * sizeof(dish));
+                makeDishesArray(mainCourses, mainCoursesSize, mainCoursesFilePath, "Main Courses");
+
+                order = removeDish(order, &dishCounter, mainCourses, mainCoursesSize, category - '0');
+                freeDishes(mainCourses, mainCoursesSize);
+            }
+            else if (category == '4')
+            {
+                char *dessertsFilePath = "Dishes/desserts.txt";
+                int dessertsSize = getFileLines(dessertsFilePath) / 2;
+                dish *desserts = malloc(dessertsSize * sizeof(dish));
+                makeDishesArray(desserts, dessertsSize, dessertsFilePath, "Desserts");
+
+                order = removeDish(order, &dishCounter, desserts, dessertsSize, category - '0');
+                freeDishes(desserts, dessertsSize);
+            }
+            else if (category == '5')
+            {
+                char *beveragesFilePath = "Dishes/beverages.txt";
+                int beveragesSize = getFileLines(beveragesFilePath) / 2;
+                dish *beverages = malloc(beveragesSize * sizeof(dish));
+                makeDishesArray(beverages, beveragesSize, beveragesFilePath, "Beverages");
+
+                order = removeDish(order, &dishCounter, beverages, beveragesSize, category - '0');
+                freeDishes(beverages, beveragesSize);
+            }
+            else
+            {
+                printf("Category not found.\n");
+            }
             printSelectionButtons();
         }
         else if (selection == '1')
