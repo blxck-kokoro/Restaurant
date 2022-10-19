@@ -252,6 +252,13 @@ char selectCategoryToRemove(void)
     }
 }
 
+void swapDishes(dish *a, dish *b)
+{
+    dish temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int dishesArraySize, int category)
 {
     printf("%s:\n", dishCategories[category - 1]);
@@ -266,6 +273,7 @@ dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int d
     printf("\nPass the number of the dish you would like to remove.\n");
     printf("'q' QUIT\n");
 
+    // TODO: Try swap position of elements. Element which we want to remove should be the last in the array.
     while (true)
     {
         char selection[2];
@@ -287,11 +295,17 @@ dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int d
                     printf("%s", dishesArray[atoi(selection) - 1].name);
                     dishFound = true;
 
-                    for (int j = i; j < *orderArraySize - 1; j++)
-                    {
-                        orderArray[j] = orderArray[j + 1];
-                    }
+                    // for (int j = i; i < *orderArraySize - 1; i++)
+                    // {
+                    //     orderArray[j] = orderArray[i + 1];
+                    // }
+
+                    swapDishes(&orderArray[i], &orderArray[*orderArraySize - 1]);
+
+                    free(orderArray[*orderArraySize - 1].name);
+                    free(orderArray[*orderArraySize - 1].category);
                     *orderArraySize = *orderArraySize - 1;
+                    orderArray = realloc(orderArray, *orderArraySize * sizeof(dish));
                     printf("Dish removed succesfuly.\n");
                     break;
                 }
