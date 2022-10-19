@@ -85,7 +85,7 @@ void printDishes(dish *dishes, int dishesArraySize)
 
 void printSelectionButtons(void)
 {
-    printf("\n'a' MENU    'q' QUIT    's' SHOW ORDER  'r' REMOVE DISH\n");
+    printf("\n'a' MENU    'q' QUIT    's' SHOW ORDER  'r' REMOVE DISH   'e' MAKE ORDER\n");
 }
 
 dish makeDish(char *dishName, float dishPrice)
@@ -342,4 +342,16 @@ dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int d
         }
     }
     return orderArray;
+}
+
+float calculateBill(dish *orderArray, int orderArraySize)
+{
+    float bill = 0;
+
+    for (int i = 0; i < orderArraySize; i++)
+    {
+        bill += orderArray[i].price;
+    }
+
+    return bill;
 }

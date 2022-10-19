@@ -12,7 +12,6 @@ int main(void)
     printf("Pass 'a' to display our menu. (q to quit)\n");
 
     dish *order = malloc(sizeof(dish));
-    order[0].name = NULL;
     int dishCounter = 0;
     //  ***   MENU SECTION  ***
     int menuSwitch = 1;
@@ -35,6 +34,8 @@ int main(void)
         else if (selection == 's')
         {
             printOrder(order, dishCounter);
+            float bill = calculateBill(order, dishCounter);
+            printf("\nOverall bill: %.2f$\n\n", bill);
             printSelectionButtons();
         }
         else if (selection == 'r')
@@ -86,6 +87,34 @@ int main(void)
                 printf("Category not found.\n");
             }
             printSelectionButtons();
+        }
+        else if (selection == 'e')
+        {
+            printOrder(order, dishCounter);
+            float bill = calculateBill(order, dishCounter);
+            printf("\nOverall bill: %.2f$\n\n", bill);
+
+            printf("Are you sure you want to make this order?\n");
+            printf("'y' YES     'n' NO\n");
+
+            while (true)
+            {
+                char choice;
+                scanf("%c", &choice);
+
+                if (choice == 'y')
+                {
+                    printf("\nOrder has been made succesfuly.\n");
+                    printf("Thank you for choosing our restaurant!\n");
+                    menuSwitch = 0;
+                    break;
+                }
+                else if (choice == 'n')
+                {
+                    printSelectionButtons();
+                    break;
+                }
+            }
         }
         else if (selection == '1')
         {
