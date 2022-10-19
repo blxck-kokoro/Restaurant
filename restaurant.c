@@ -24,11 +24,11 @@ int main(void)
         if (selection == 'q')
         {
             menuSwitch = 0;
-            printf("See you soon!\n");
+            printf("\nSee you soon!\n");
         }
         else if (selection == 'a')
         {
-            printf("                            ***            CATEGORIES          ***\n");
+            printf("\n                                      ***   CATEGORIES  ***\n\n");
             printMenu(dishCategories, DISH_CATEGORIES_LENGTH);
             printf("\nPass the number of the specific cateogry to view it's content.\n");
         }
