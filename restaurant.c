@@ -104,6 +104,30 @@ int main(void)
 
                 if (choice == 'y')
                 {
+                    printf("\nWould you like to leave a tip?\n");
+                    printf("'y' YES     'n' NO\n");
+
+                    while (true)
+                    {
+                        char tip;
+                        scanf("%c", &tip);
+
+                        if (tip == 'y')
+                        {
+                            printf("Pass the tip: ");
+                            float tipSize;
+                            scanf("%f", &tipSize);
+
+                            bill += tipSize;
+                            printf("Overall bill after tip: %.2f$\n", bill);
+                            break;
+                        }
+                        else if (tip == 'n')
+                        {
+                            break;
+                        }
+                    }
+
                     printf("\nOrder has been made succesfuly.\n");
                     printf("Thank you for choosing our restaurant!\n");
                     menuSwitch = 0;
