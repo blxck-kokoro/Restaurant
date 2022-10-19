@@ -43,50 +43,40 @@ int main(void)
 
             if (category == '1')
             {
-                char *appetizersFilePath = "Dishes/appetizers.txt";
-                int appetizersSize = getFileLines(appetizersFilePath) / 2;
-                dish *appetizers = malloc(appetizersSize * sizeof(dish));
-                makeDishesArray(appetizers, appetizersSize, appetizersFilePath, "Appetizers");
+                dish *appetizers = makeDishesArray("Dishes/appetizers.txt", "Appetizers");
+                int appetizersSize = getDishesArraySize("Dishes/appetizers.txt");
 
                 order = removeDish(order, &dishCounter, appetizers, appetizersSize, category - '0');
                 freeDishes(appetizers, appetizersSize);
             }
             else if (category == '2')
             {
-                char *soupsFilePath = "Dishes/soups.txt";
-                int soupsSize = getFileLines(soupsFilePath) / 2;
-                dish *soups = malloc(soupsSize * sizeof(dish));
-                makeDishesArray(soups, soupsSize, soupsFilePath, "Soups");
+                dish *soups = makeDishesArray("Dishes/soups.txt", "Soups");
+                int soupsSize = getDishesArraySize("Dishes/soups.txt");
 
                 order = removeDish(order, &dishCounter, soups, soupsSize, category - '0');
                 freeDishes(soups, soupsSize);
             }
             else if (category == '3')
             {
-                char *mainCoursesFilePath = "Dishes/mainCourses.txt";
-                int mainCoursesSize = getFileLines(mainCoursesFilePath) / 2;
-                dish *mainCourses = malloc(mainCoursesSize * sizeof(dish));
-                makeDishesArray(mainCourses, mainCoursesSize, mainCoursesFilePath, "Main Courses");
+                dish *mainCourses = makeDishesArray("Dishes/mainCourses.txt", "Main Courses");
+                int mainCoursesSize = getDishesArraySize("Dishes/mainCourses.txt");
 
                 order = removeDish(order, &dishCounter, mainCourses, mainCoursesSize, category - '0');
                 freeDishes(mainCourses, mainCoursesSize);
             }
             else if (category == '4')
             {
-                char *dessertsFilePath = "Dishes/desserts.txt";
-                int dessertsSize = getFileLines(dessertsFilePath) / 2;
-                dish *desserts = malloc(dessertsSize * sizeof(dish));
-                makeDishesArray(desserts, dessertsSize, dessertsFilePath, "Desserts");
+                dish *desserts = makeDishesArray("Dishes/desserts.txt", "Desserts");
+                int dessertsSize = getDishesArraySize("Dishes/desserts.txt");
 
                 order = removeDish(order, &dishCounter, desserts, dessertsSize, category - '0');
                 freeDishes(desserts, dessertsSize);
             }
             else if (category == '5')
             {
-                char *beveragesFilePath = "Dishes/beverages.txt";
-                int beveragesSize = getFileLines(beveragesFilePath) / 2;
-                dish *beverages = malloc(beveragesSize * sizeof(dish));
-                makeDishesArray(beverages, beveragesSize, beveragesFilePath, "Beverages");
+                dish *beverages = makeDishesArray("Dishes/beverages.txt", "Beverages");
+                int beveragesSize = getDishesArraySize("Dishes/beverages.txt");
 
                 order = removeDish(order, &dishCounter, beverages, beveragesSize, category - '0');
                 freeDishes(beverages, beveragesSize);
@@ -99,10 +89,8 @@ int main(void)
         }
         else if (selection == '1')
         {
-            char *appetizersFilePath = "Dishes/appetizers.txt";
-            int appetizersSize = getFileLines(appetizersFilePath) / 2;
-            dish *appetizers = malloc(appetizersSize * sizeof(dish));
-            makeDishesArray(appetizers, appetizersSize, appetizersFilePath, "Appetizers");
+            dish *appetizers = makeDishesArray("Dishes/appetizers.txt", "Appetizers");
+            int appetizersSize = getDishesArraySize("Dishes/appetizers.txt");
             printDishes(appetizers, appetizersSize);
             
             order = makeOrder(order, appetizers, appetizersSize, &dishCounter);
@@ -111,10 +99,8 @@ int main(void)
         }
         else if (selection == '2')
         {
-            char *soupsFilePath = "Dishes/soups.txt";
-            int soupsSize = getFileLines(soupsFilePath) / 2;
-            dish *soups = malloc(soupsSize * sizeof(dish));
-            makeDishesArray(soups, soupsSize, soupsFilePath, "Soups");
+            dish *soups = makeDishesArray("Dishes/soups.txt", "Soups");
+            int soupsSize = getDishesArraySize("Dishes/soups.txt");
             printDishes(soups, soupsSize);
 
             order = makeOrder(order, soups, soupsSize, &dishCounter);
@@ -123,10 +109,8 @@ int main(void)
         }
         else if (selection == '3')
         {
-            char *mainCoursesFilePath = "Dishes/mainCourses.txt";
-            int mainCoursesSize = getFileLines(mainCoursesFilePath) / 2;
-            dish *mainCourses = malloc(mainCoursesSize * sizeof(dish));
-            makeDishesArray(mainCourses, mainCoursesSize, mainCoursesFilePath, "Main Courses");
+            dish *mainCourses = makeDishesArray("Dishes/mainCourses.txt", "Main Courses");
+            int mainCoursesSize = getDishesArraySize("Dishes/mainCourses.txt");
             printDishes(mainCourses, mainCoursesSize);
 
             order = makeOrder(order, mainCourses, mainCoursesSize, &dishCounter);
@@ -135,10 +119,8 @@ int main(void)
         }
         else if (selection == '4')
         {
-            char *dessertsFilePath = "Dishes/desserts.txt";
-            int dessertsSize = getFileLines(dessertsFilePath) / 2;
-            dish *desserts = malloc(dessertsSize * sizeof(dish));
-            makeDishesArray(desserts, dessertsSize, dessertsFilePath, "Desserts");
+            dish *desserts = makeDishesArray("Dishes/desserts.txt", "Desserts");
+            int dessertsSize = getDishesArraySize("Dishes/desserts.txt");
             printDishes(desserts, dessertsSize);
 
             order = makeOrder(order, desserts, dessertsSize, &dishCounter);
@@ -147,10 +129,8 @@ int main(void)
         }
         else if (selection == '5')
         {
-            char *beveragesFilePath = "Dishes/beverages.txt";
-            int beveragesSize = getFileLines(beveragesFilePath) / 2;
-            dish *beverages = malloc(beveragesSize * sizeof(dish));
-            makeDishesArray(beverages, beveragesSize, beveragesFilePath, "Beverages");
+            dish *beverages = makeDishesArray("Dishes/beverages.txt", "Beverages");
+            int beveragesSize = getDishesArraySize("Dishes/beverages.txt");
             printDishes(beverages, beveragesSize);
 
             order = makeOrder(order, beverages, beveragesSize, &dishCounter);

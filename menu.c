@@ -19,7 +19,7 @@ char *dishCategories[DISH_CATEGORIES_LENGTH] = {"Appetizers", "Soups", "Main Cou
 void printMenu(char *menu[], int menuSize);
 
 // Prints the dishes to user
-void printDishes(dish *dishes, int dishesSize);
+void printDishes(dish *dishes, int dishesArraySize);
 
 // Prints selection buttons, which tell user how to navigate across the progam
 void printSelectionButtons(void);
@@ -40,7 +40,13 @@ int getFileLines(char *documentPath);
 void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][elementSize], float pricesArray[arraySize], char *documentPath);
 
 // Polutes dishesArray with dish objects
-void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath, char *dishesCategory);
+void poluteDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath, char *dishesCategory);
+
+// Returns a new dishesArray
+dish *makeDishesArray(char *filePath, char *dishesCategory);
+
+// Returns dishesArray size
+int getDishesArraySize(char *filePath);
 
 // Frees dynamic allocated memory used in makeDishesArray()
 void freeDishes(dish *dishesArray, int dishesArraySize);
@@ -50,6 +56,9 @@ dish *makeOrder(dish *orderArray, dish *dishesArray, int dishesArraySize, int *c
 
 // Returns the char representing category of the dish we want to remove from the order
 char selectCategoryToRemove(void);
+
+// Swaps positions of dishes in array
+void swapDishes(dish *a, dish *b);
 
 // Removes the dish from the orderArray
 dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int dishesArraySize, int category);
@@ -65,9 +74,10 @@ void printMenu(char *menu[], int menuSize)
     printf("\n");
 }
 
-void printDishes(dish *dishes, int dishesSize)
+void printDishes(dish *dishes, int dishesArraySize)
 {
-    for (int i = 0; i < dishesSize; i++)
+
+    for (int i = 0; i < dishesArraySize; i++)
     {
         printf("%s  %.2f$\n\n", dishes[i].name, dishes[i].price);
     }
@@ -139,7 +149,7 @@ void getDishesInfo(int arraySize, int elementSize, char namesArray[arraySize][el
     fclose(documentPt);
 }
 
-void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath, char *dishesCategory)
+void poluteDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath, char *dishesCategory)
 {
     int dishesNamesSize = dishesArraySize;
     int dishesNamesElementSize = 256;
@@ -158,6 +168,22 @@ void makeDishesArray(dish *dishesArray, int dishesArraySize, char *documentPath,
         strcpy(dishesArray[i].category, dishesCategory);
         dishesArray[i].price = dishesPrices[i];
     }
+}
+
+dish *makeDishesArray(char *filePath, char *dishesCategory)
+{
+    char *dishesArrayFilePath = filePath;
+    int dishesArraySize = getFileLines(filePath) / 2;
+    dish *dishesArray = malloc(dishesArraySize * sizeof(dish));
+    poluteDishesArray(dishesArray, dishesArraySize, filePath, dishesCategory);
+
+    return dishesArray;
+}
+
+int getDishesArraySize(char *filePath)
+{
+    int dishesArraySize = getFileLines(filePath) / 2;
+    return dishesArraySize;
 }
 
 void freeDishes(dish *dishesArray, int dishesArraySize)
@@ -273,7 +299,6 @@ dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int d
     printf("\nPass the number of the dish you would like to remove.\n");
     printf("'q' QUIT\n");
 
-    // TODO: Try swap position of elements. Element which we want to remove should be the last in the array.
     while (true)
     {
         char selection[2];
@@ -295,17 +320,13 @@ dish *removeDish(dish *orderArray, int *orderArraySize, dish *dishesArray, int d
                     printf("%s", dishesArray[atoi(selection) - 1].name);
                     dishFound = true;
 
-                    // for (int j = i; i < *orderArraySize - 1; i++)
-                    // {
-                    //     orderArray[j] = orderArray[i + 1];
-                    // }
-
                     swapDishes(&orderArray[i], &orderArray[*orderArraySize - 1]);
 
                     free(orderArray[*orderArraySize - 1].name);
                     free(orderArray[*orderArraySize - 1].category);
                     *orderArraySize = *orderArraySize - 1;
                     orderArray = realloc(orderArray, *orderArraySize * sizeof(dish));
+                    
                     printf("Dish removed succesfuly.\n");
                     break;
                 }
